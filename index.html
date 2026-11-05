@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedSynapse AI Healthcare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- LOGIN PAGE -->
+    <!-- ========================= -->
+
+    <div class="page active-page" id="loginPage">
+
+        <div class="login-left">
+
+            <div class="logo">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <h1>MedSynapse</h1>
+            </div>
+
+            <h2>
+                AI Powered <br> Smart Healthcare Ecosystem
+            </h2>
+
+            <p>
+                Transforming hospitals, emergency response, medicines, ambulances, reports, AI analytics, and patient care into one intelligent platform.
+            </p>
+
+        </div>
+
+        <div class="login-right">
+
+            <div class="login-box">
+
+                <h2>Welcome Back</h2>
+
+                <p>Select Login Type</p>
+
+                <!-- LOGIN TYPE -->
+
+                <select id="loginRole">
+
+        <option value="doctor">
+            Doctor Login
+        </option>
+
+        <option value="patient">
+            Patient Login
+        </option>
+
+        <option value="admin">
+            Admin Login
+        </option>
+
+        <option value="guest">
+            Guest Mode
+        </option>
+
+    </select>
+
+                <!-- EMAIL -->
+
+                <input type="email" id="email" placeholder="Email Address">
+
+                <!-- PASSWORD -->
+
+                <input type="password" id="password" placeholder="Password">
+
+                <button onclick="loginUser()">
+        Login
+    </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- MAIN DASHBOARD -->
+    <!-- ========================= -->
+
+    <div class="page" id="dashboardPage">
+
+        <div class="sidebar">
+
+            <div>
+
+                <h2>MedSynapse</h2>
+
+                <p>Healthcare AI System</p>
+
+                <div class="menu">
+
+                    <button onclick="openPage('bedsPage')">
+                    <i class="fa-solid fa-bed"></i>
+                    Beds
+                </button>
+
+                    <button onclick="openPage('bloodPage')">
+                    <i class="fa-solid fa-droplet"></i>
+                    Blood Bank
+                </button>
+
+                    <button onclick="openPage('ambulancePage')">
+                    <i class="fa-solid fa-truck-medical"></i>
+                    Ambulance
+                </button>
+
+                    <button onclick="openPage('medicinePage')">
+                    <i class="fa-solid fa-capsules"></i>
+                    Medicines
+                </button>
+
+                    <button onclick="openPage('consultationPage')">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    Consultation
+                </button>
+
+                    <button onclick="openPage('analyticsPage')">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Analytics
+                </button>
+
+                    <button onclick="openPage('sosPage')">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Emergency SOS
+                </button>
+
+                </div>
+
+            </div>
+
+            <!-- BOTTOM BUTTONS -->
+
+            <div class="sidebar-bottom">
+
+                <button class="logout-btn" onclick="logout()">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+
+            </button>
+
+                <div class="settings-wrapper">
+
+                    <button class="settings-btn" onclick="toggleSettingsMenu()">
+
+        <i class="fa-solid fa-gear"></i>
+        Settings
+
+    </button>
+
+                    <!-- DROPDOWN -->
+
+                    <div class="settings-dropdown" id="settingsDropdown">
+
+                        <button onclick="toggleCreateAccount()">
+            Create Account
+        </button>
+
+                        <button onclick="toggleThemeOptions()">
+            Themes
+        </button>
+
+                        <button onclick="toggleNotifications()">
+            Notifications
+        </button>
+
+                        <button onclick="alert('Privacy Settings Opened')">
+            Privacy
+        </button>
+
+                        <button onclick="alert('Language Settings Opened')">
+            Language
+        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ========================= -->
+        <!-- CREATE ACCOUNT POPUP -->
+        <!-- ========================= -->
+
+        <div class="popup-box" id="createAccountPopup">
+
+            <div class="popup-content">
+
+                <h2>Create Account</h2>
+
+                <input type="text" placeholder="Full Name">
+
+                <input type="email" placeholder="Email">
+
+                <input type="password" placeholder="Password">
+
+                <select>
+
+            <option>Doctor</option>
+            <option>Patient</option>
+            <option>Admin</option>
+
+        </select>
+
+                <button onclick="createAccount()">
+            Create
+        </button>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- THEME POPUP -->
+        <!-- ========================= -->
+
+        <div class="popup-box" id="themePopup">
+
+            <div class="popup-content">
+
+                <h2>Select Theme</h2>
+
+                <button onclick="setTheme('light')">
+            Light Theme
+        </button>
+
+                <button onclick="setTheme('dark')">
+            Dark Theme
+        </button>
+
+                <button onclick="setTheme('natural')">
+            Natural Theme
+        </button>
+
+            </div>
+
+        </div>
+
+        <!-- ========================= -->
+        <!-- NOTIFICATIONS POPUP -->
+        <!-- ========================= -->
+
+        <div class="popup-box" id="notificationPopup">
+
+            <div class="popup-content">
+
+                <h2>Notifications</h2>
+
+                <label>
+            <input type="checkbox" checked>
+            Emergency Alerts
+        </label>
+
+                <label>
+            <input type="checkbox" checked>
+            Medicine Alerts
+        </label>
+
+                <label>
+            <input type="checkbox">
+            Appointment Alerts
+        </label>
+
+            </div>
+
+        </div>
+        <div class="main">
+
+            <div class="topbar">
+
+                <h1>Healthcare Dashboard</h1>
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input type="text" placeholder="Search">
+
+                </div>
+
+            </div>
+
+            <div class="stats">
+
+                <div class="stat-card">
+                    <h3>Hospitals</h3>
+                    <h1>52</h1>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Doctors</h3>
+                    <h1>245</h1>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Ambulances</h3>
+                    <h1>39</h1>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Emergency Alerts</h3>
+                    <h1>18</h1>
+                </div>
+
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card" onclick="openPage('bedsPage')">
+
+                    <i class="fa-solid fa-bed"></i>
+
+                    <h3>Bed Availability</h3>
+
+                    <p>Track ICU & oxygen beds live.</p>
+
+                </div>
+
+                <div class="feature-card" onclick="openPage('bloodPage')">
+
+                    <i class="fa-solid fa-droplet"></i>
+
+                    <h3>Blood Bank</h3>
+
+                    <p>Live donor & blood stock tracking.</p>
+
+                </div>
+
+                <div class="feature-card" onclick="openPage('ambulancePage')">
+
+                    <i class="fa-solid fa-truck-medical"></i>
+
+                    <h3>Ambulance Tracking</h3>
+
+                    <p>GPS enabled emergency tracking.</p>
+
+                </div>
+
+                <div class="feature-card" onclick="openPage('analyticsPage')">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <h3>AI Analytics</h3>
+
+                    <p>Healthcare prediction system.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="page feature-page" id="ambulancePage">
+
+        <div class="feature-header">
+            <button onclick="backDashboard()">← Back</button>
+            <h1>Ambulance Network</h1>
+        </div>
+
+        <div class="hospital-selector">
+
+            <button onclick="showAmbulances('apollo')">Apollo</button>
+            <button onclick="showAmbulances('fortis')">Fortis</button>
+            <button onclick="showAmbulances('cloud')">Cloud 9</button>
+
+        </div>
+
+        <div id="ambulanceView"></div>
+
+    </div>
+    <div class="page feature-page" id="bedsPage">
+
+        <div class="feature-header">
+            <button onclick="backDashboard()">← Back</button>
+            <h1>Hospital Bed Availability</h1>
+        </div>
+
+        <!-- HOSPITAL SELECTOR -->
+        <div class="hospital-selector">
+
+            <button onclick="showHospital('apollo', 100)">Apollo Hospital</button>
+            <button onclick="showHospital('fortis', 150)">Fortis Hospital</button>
+            <button onclick="showHospital('cloud', 120)">Cloud 9 Hospital</button>
+
+        </div>
+
+        <!-- DYNAMIC DISPLAY AREA -->
+        <div id="hospitalView"></div>
+
+        <!-- LEGEND -->
+        <div class="legend-box">
+            <div class="legend-item">
+                <span class="legend occupied-color"></span> Occupied
+            </div>
+            <div class="legend-item">
+                <span class="legend critical-color"></span> Critical
+            </div>
+            <div class="legend-item">
+                <span class="legend available-color"></span> Available
+            </div>
+        </div>
+
+    </div>
+    <div class="page feature-page" id="bloodPage">
+
+        <div class="feature-header">
+            <button onclick="backDashboard()">← Back</button>
+            <h1>Blood Bank</h1>
+        </div>
+
+        <div class="hospital-selector">
+
+            <button onclick="showBlood('apollo')">Apollo</button>
+            <button onclick="showBlood('fortis')">Fortis</button>
+            <button onclick="showBlood('cloud')">Cloud 9</button>
+
+        </div>
+
+        <div id="bloodView"></div>
+
+    </div>
+    <!-- ========================= -->
+    <!-- MEDICINE PAGE -->
+    <!-- ========================= -->
+
+    <div class="page feature-page" id="medicinePage">
+
+        <div class="feature-header">
+
+            <button onclick="backDashboard()">← Back</button>
+            <h1>Medicine Store</h1>
+
+            <!-- CART ICON -->
+            <div class="cart-icon" onclick="openCart()">
+                🛒 <span id="cartCount">0</span>
+            </div>
+
+        </div>
+
+        <div class="hospital-selector">
+
+            <button onclick="showMedicines('apollo')">Apollo</button>
+            <button onclick="showMedicines('fortis')">Fortis</button>
+            <button onclick="showMedicines('cloud')">Cloud 9</button>
+
+        </div>
+
+        <div id="medicineView"></div>
+
+    </div>
+    <div id="cartModal" class="modal">
+
+        <div class="modal-box">
+
+            <h2>Cart</h2>
+
+            <div id="cartItems"></div>
+
+            <h3>Checkout Details</h3>
+
+            <input id="userName" placeholder="Full Name">
+            <input id="userPhone" placeholder="Phone Number">
+            <input id="userAddress" placeholder="Address">
+
+            <select id="paymentMethod">
+            <option>Cash on Delivery</option>
+            <option>UPI</option>
+            <option>Card Payment</option>
+        </select>
+
+            <button onclick="checkout()">Place Order</button>
+            <button onclick="closeCart()">Close</button>
+
+        </div>
+
+    </div>
+    <!-- ========================= -->
+    <!-- CONSULTATION PAGE -->
+    <!-- ========================= -->
+
+    <div class="page feature-page" id="consultationPage">
+
+        <div class="feature-header">
+            <button onclick="backDashboard()">← Back</button>
+            <h1>Online Consultation</h1>
+        </div>
+
+        <div class="doctor-grid">
+
+            <div class="doctor-card">
+                <h3>Dr. Rajesh</h3>
+                <p>Cardiologist</p>
+                <button onclick="openBooking('Dr. Rajesh')">Book</button>
+            </div>
+
+            <div class="doctor-card">
+                <h3>Dr. Priya</h3>
+                <p>Neurologist</p>
+                <button onclick="openBooking('Dr. Priya')">Book</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="bookingModal" class="modal">
+
+        <div class="modal-box">
+
+            <h2 id="doctorName">Book Appointment</h2>
+
+            <input type="text" id="patientName" placeholder="Full Name">
+
+            <input type="number" id="patientAge" placeholder="Age">
+
+            <input type="date" id="patientDOB">
+
+            <h3>Select Symptoms</h3>
+
+            <div class="symptoms">
+
+                <label><input type="checkbox" value="Fever"> Fever</label>
+                <label><input type="checkbox" value="Headache"> Headache</label>
+                <label><input type="checkbox" value="Chest Pain"> Chest Pain</label>
+                <label><input type="checkbox" value="Breathing Issue"> Breathing Issue</label>
+                <label><input type="checkbox" value="Fatigue"> Fatigue</label>
+                <label><input type="checkbox" value="Dizziness"> Dizziness</label>
+
+            </div>
+
+            <button onclick="bookAppointment()">Confirm Booking</button>
+            <button onclick="closeBooking()">Cancel</button>
+
+        </div>
+
+    </div>
+    <div class="page feature-page" id="analyticsPage">
+
+        <div class="feature-header">
+            <button onclick="backDashboard()">← Back</button>
+            <h1>AI Patient Monitoring System</h1>
+        </div>
+
+        <!-- PATIENT INPUT -->
+        <div class="patient-form">
+
+            <h2>Enter Patient Vitals</h2>
+
+            <input id="bpInput" type="number" placeholder="Blood Pressure (e.g. 120)">
+            <input id="sugarInput" type="number" placeholder="Sugar Level (e.g. 100)">
+            <input id="oxygenInput" type="number" placeholder="Oxygen Level (e.g. 98)">
+            <input id="heartInput" type="number" placeholder="Heart Rate (e.g. 80)">
+
+            <button onclick="analyzePatient()">
+            Generate Health Report
+        </button>
+
+        </div>
+
+        <!-- STATUS TILES (CLICKABLE) -->
+        <div class="analytics-grid">
+
+            <div class="analytics-card" onclick="openMini('bp')">
+                <h2>Blood Pressure</h2>
+                <p id="bpStatus">--</p>
+            </div>
+
+            <div class="analytics-card" onclick="openMini('sugar')">
+                <h2>Sugar Level</h2>
+                <p id="sugarStatus">--</p>
+            </div>
+
+            <div class="analytics-card" onclick="openMini('oxygen')">
+                <h2>Oxygen Level</h2>
+                <p id="oxygenStatus">--</p>
+            </div>
+
+            <div class="analytics-card" onclick="openMini('heart')">
+                <h2>Heart Rate</h2>
+                <p id="heartStatus">--</p>
+            </div>
+
+        </div>
+
+        <!-- MAIN GRAPH -->
+        <div class="graph-box">
+            <h2 id="graphTitle">Enter patient data to view report</h2>
+            <canvas id="healthChart"></canvas>
+        </div>
+
+    </div>
+    <div id="miniGraphModal" class="modal">
+
+        <div class="modal-box">
+
+            <h2 id="miniTitle">Graph</h2>
+            <canvas id="miniChart"></canvas>
+
+            <button onclick="closeMiniGraph()">Close</button>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- SOS PAGE -->
+    <!-- ========================= -->
+
+    <div class="page feature-page" id="sosPage">
+
+        <div class="feature-header">
+
+            <button onclick="backDashboard()">
+            ← Back
+        </button>
+
+            <h1>Emergency SOS</h1>
+
+        </div>
+
+        <div class="sos-box">
+
+            <button class="sos-btn">
+            SEND EMERGENCY ALERT
+        </button>
+
+        </div>
+
+    </div>
+    <!-- ========================= -->
+    <!-- SETTINGS PAGE -->
+    <!-- ========================= -->
+
+    <div class="page feature-page" id="settingsPage">
+
+        <div class="feature-header">
+
+            <button onclick="backDashboard()">
+            ← Back
+        </button>
+
+            <h1>Settings</h1>
+
+        </div>
+
+        <div class="settings-container">
+
+            <!-- CREATE ACCOUNT -->
+
+            <div class="settings-card">
+
+                <h2>Create Account</h2>
+
+                <input type="text" id="createName" placeholder="Full Name">
+
+                <input type="email" id="createEmail" placeholder="Email">
+
+                <input type="password" id="createPassword" placeholder="Password">
+
+                <select id="createRole">
+
+                <option>Doctor</option>
+                <option>Patient</option>
+                <option>Admin</option>
+
+            </select>
+
+                <button onclick="createAccount()">
+                Create Account
+            </button>
+
+            </div>
+
+            <!-- THEMES -->
+
+            <div class="settings-card">
+
+                <h2>Choose Theme</h2>
+
+                <div class="theme-buttons">
+
+                    <button onclick="setTheme('light')">
+                    Light Theme
+                </button>
+
+                    <button onclick="setTheme('dark')">
+                    Dark Theme
+                </button>
+
+                    <button onclick="setTheme('natural')">
+                    Natural Theme
+                </button>
+
+                </div>
+
+            </div>
+
+            <!-- NOTIFICATIONS -->
+
+            <div class="settings-card">
+
+                <h2>Notifications</h2>
+
+                <label>
+                <input type="checkbox" checked>
+                Emergency Alerts
+            </label>
+
+                <label>
+                <input type="checkbox" checked>
+                Medicine Notifications
+            </label>
+
+                <label>
+                <input type="checkbox">
+                Appointment Notifications
+            </label>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
